@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Mood Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .mood-buttons {
+      margin: 20px 0;
+    }
+
+    button {
+      font-size: 1.2em;
+      margin: 0 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+
+    #current-mood {
+      font-size: 2em;
+      margin: 20px 0;
+    }
+
+    #mood-log {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #mood-log li {
+      background-color: #e0ffff;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Daily Mood Tracker</h1>
+  <p>Select your mood for today:</p>
+  <div class="mood-buttons">
+    <button data-mood="😊">Happy</button>
+    <button data-mood="😐">Neutral</button>
+    <button data-mood="😢">Sad</button>
+    <button data-mood="😡">Angry</button>
+  </div>
+  <div id="current-mood"></div>
+  <h2>My Mood Log</h2>
+  <ul id="mood-log"></ul>
+
+  <script>
+    const buttons = document.querySelectorAll('.mood-buttons button');
+    const currentMoodDiv = document.getElementById('current-mood');
+    const moodLogUl = document.getElementById('mood-log');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const moodEmoji = button.getAttribute('data-mood');
+        const moodText = button.textContent;
+        // Display current mood
+        currentMoodDiv.textContent = \`Your mood today: \${moodEmoji} (\${moodText})\`;
+
+        // Log mood with timestamp
+        const now = new Date();
+        const timeString = now.toLocaleString();
+        const li = document.createElement('li');
+        li.textContent = \`\${timeString}: \${moodText} \${moodEmoji}\`;
+        moodLogUl.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>
